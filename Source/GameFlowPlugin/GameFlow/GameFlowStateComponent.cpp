@@ -19,6 +19,8 @@ void UGameFlowStateComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
+	checkf(GetTypedOuter<AGameStateBase>() != nullptr, TEXT("GameFlowStateComponent must be attached to a GameState"));
+
 	for (UGameFlowAction* Singleton : SingletonActions)
 	{
 		if (ensureMsgf(IsValid(Singleton), TEXT("Invalid singleton action")))

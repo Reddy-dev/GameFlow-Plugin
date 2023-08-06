@@ -92,54 +92,6 @@ void UGameFlowState::OnStateFinished(UGameFlowAction* InAction, bool bInterrupte
 		FinishState();
 		return;
 	}
-	
-	/*switch (ExecutionMode)
-	{
-		case EGameFlowExecutionMode::Linear:
-			Index = Actions.Find(InAction);
-		if (Index != INDEX_NONE && Index + 1 < Actions.Num())
-		{
-			Actions[Index + 1]->OnFinished.BindUObject(this, &UGameFlowState::OnStateFinished);
-			Actions[Index + 1]->StartAction();
-		}
-		else
-		{
-			FinishState();
-		}
-		break;
-		
-		case EGameFlowExecutionMode::Parallel:
-			for (const UGameFlowAction* Action : Actions)
-			{
-				if (Action->bEnabled)
-				{
-					return;
-				}
-			}
-
-		FinishState();
-		break;
-		case EGameFlowExecutionMode::Branched:
-			TArray<UGameFlowAction*> Chain;
-		checkf(ChainActions.Contains(InAction->BranchedChainTag), TEXT("Chain tag not found!"));
-		TArray<UGameFlowAction*>& LocChainActions = ChainActions[InAction->BranchedChainTag];
-		Index = LocChainActions.Find(InAction);
-		if (Index != INDEX_NONE && Index + 1 < LocChainActions.Num())
-		{
-			LocChainActions[Index + 1]->OnFinished.BindUObject(this, &UGameFlowState::OnStateFinished);
-			LocChainActions[Index + 1]->StartAction();
-		}
-		else
-		{
-			ChainActions.Remove(InAction->BranchedChainTag);
-			if (ChainActions.Num() == 0)
-			{
-				FinishState();
-			}
-		}
-		break;
-		default: ;
-	};*/
 
 	if (ExecutionMode == EGameFlowExecutionMode::Linear)
 	{

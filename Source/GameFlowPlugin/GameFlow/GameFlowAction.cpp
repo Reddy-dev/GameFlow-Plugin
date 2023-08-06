@@ -55,12 +55,12 @@ void UGameFlowAction::InterruptActionNative()
 
 void UGameFlowAction::InterruptAction()
 {
-	
+	InterruptActionNative();
 }
 
 void UGameFlowAction::FinishAction()
 {
-	
+	EndAction();
 }
 
 void UGameFlowAction::OnActionInterrupted_Implementation()
