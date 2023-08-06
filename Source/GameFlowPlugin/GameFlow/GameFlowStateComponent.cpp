@@ -116,7 +116,7 @@ bool UGameFlowStateComponent::StartState(UGameFlowState* State)
 
 		for (TTuple<FGameplayTag, TObjectPtr<UGameFlowState>>& StatePair : StateMap)
 		{
-			if (RequiredStateTags.HasTagExact(StatePair.Key))
+			if (!RequiredStateTags.HasTagExact(StatePair.Key))
 			{
 				return false;
 			}
