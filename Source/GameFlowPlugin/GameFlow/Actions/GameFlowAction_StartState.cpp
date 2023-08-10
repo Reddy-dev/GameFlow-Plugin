@@ -8,16 +8,13 @@ void UGameFlowAction_StartState::OnActionStart_Implementation()
 {
 	Super::OnActionStart_Implementation();
 
-	switch (StateType)
+	if (GetStateComponent()->StartStateByTag(StateTag))
 	{
-		case EGameFlowStateType::GameplayTag:
-			GetStateComponent()->StartStateByTag(StateTag);
-			break;
-		case EGameFlowStateType::SubclassOf:
-			GetStateComponent()->StartStateByClass(StateClass);
-			break;
-		default: ;
+		FinishAction();
 	}
-
-	FinishAction();
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("GameFlowAction_StartState: Failed to start state with tag %s"), *StateTag.ToString());
+		InterruptActionNative();
+	}
 }

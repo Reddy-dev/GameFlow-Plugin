@@ -10,7 +10,6 @@ UENUM(BlueprintType)
 enum class EGameFlowStateType : uint8
 {
 	GameplayTag,
-	SubclassOf,
 };
 
 UCLASS(BlueprintType, Blueprintable, meta = (DisplayName = "Start State"), EditInlineNew, DefaultToInstanced)
@@ -20,16 +19,9 @@ class GAMEFLOWPLUGIN_API UGameFlowAction_StartState : public UGameFlowAction
 
 public:
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GameFlow")
-	EGameFlowStateType StateType;
-
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GameFlow",
 		meta = (EditCondition = "StateType == EGameFlowStateType::GameplayTag"))
 	FGameplayTag StateTag;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GameFlow",
-		meta = (EditCondition = "StateType == EGameFlowStateType::SubclassOf"))
-	TSubclassOf<UGameFlowState> StateClass;
 
 	virtual void OnActionStart_Implementation() override;
 };
