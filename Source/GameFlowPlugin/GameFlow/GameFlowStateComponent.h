@@ -11,7 +11,7 @@ class UGameFlowAction;
 class UGameFlowState;
 
 // Place on Game State
-UCLASS(ClassGroup=(GameFlow), meta=(BlueprintSpawnableComponent))
+UCLASS(ClassGroup=(GameFlow), BlueprintType, meta=(BlueprintSpawnableComponent))
 class GAMEFLOWPLUGIN_API UGameFlowStateComponent : public UActorComponent
 {
 	GENERATED_BODY()
