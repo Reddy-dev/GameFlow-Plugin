@@ -65,7 +65,12 @@ void UGameFlowState::FinishState()
 	for (UGameFlowAction* Action : Actions)
 	{
 		Action->OnFinished.Unbind();
-		ensureMsgf(!Action->bEnabled, TEXT("Action is still enabled!"));
+		
+		if (Action->bEnabled)
+		{
+			Action->FinishAction();
+		}
+		
 		Action->bEnabled = false;
 	}
 	
