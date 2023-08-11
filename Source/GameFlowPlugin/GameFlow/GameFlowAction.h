@@ -19,7 +19,8 @@ public:
 	UGameFlowAction(const FObjectInitializer& ObjectInitializer);
 	UGameFlowAction();
 
-	virtual UWorld* GetWorld() const override { return GetOuter()->GetOuter()->GetWorld(); }
+	virtual UWorld* GetWorld() const override { return GetGameState() ? GetGameState()->GetWorld()
+		: GetOuter()->GetWorld(); }
 
 	FGameFlowActionFinishedDelegate OnFinished;
 
