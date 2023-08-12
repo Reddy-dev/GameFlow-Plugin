@@ -13,8 +13,7 @@ class GAMEFLOWPLUGIN_API UGameFlowAction_StartState : public UGameFlowAction
 
 public:
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GameFlow",
-		meta = (EditCondition = "StateType == EGameFlowStateType::GameplayTag"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GameFlow")
 	FGameplayTag StateTag;
 
 	virtual void OnActionStart_Implementation() override;
