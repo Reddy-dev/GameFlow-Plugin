@@ -1,5 +1,6 @@
 ﻿// Copyright Epic Games, Inc. All Rights Reserved.
 
+using System.IO;
 using UnrealBuildTool;
 
 public class GameFlowPlugin : ModuleRules
@@ -10,7 +11,9 @@ public class GameFlowPlugin : ModuleRules
 		
 		PublicIncludePaths.AddRange(
 			new string[] {
-				
+                ModuleDirectory,
+                Path.Combine(ModuleDirectory, "GameFlow"),
+                Path.Combine(ModuleDirectory, "GameFlow/Actions"),
 			}
 			);
 				
