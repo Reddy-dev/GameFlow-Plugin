@@ -3,6 +3,7 @@
 #include "GameFlowStateComponent.h"
 #include "GameFlowAction.h"
 #include "GameFlowState.h"
+#include "GameFlowStateComponentDefinition.h"
 #include "Net/UnrealNetwork.h"
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(GameFlowStateComponent)
@@ -159,6 +160,29 @@ UGameFlowState* UGameFlowStateComponent::GetStateByTag(FGameplayTag StateTag) co
 	}
 
 	return nullptr;
+}
+
+void UGameFlowStateComponent::ApplyStateDefinition(UGameFlowStateComponentDefinition* StateDefinition)
+{
+	if (ensureMsgf(StateDefinition, TEXT("Invalid state definition!")))
+	{
+		for (UGameFlowAction* Action : StateDefinition->SingletonActions)
+		{
+			if (ensureMsgf(!SingletonActions.Contains(Action), TEXT("Singleton action already exists!")))
+			{
+				SingletonActions.AddUnique(DuplicateObject(Action, this));
+			}
+		}
+		
+		for (auto StatePair : StateDefinition->StateMap)
+		{
+			if (ensureMsgf(!StateMap.Contains(StatePair.Key), TEXT("State tag already exists!")))
+			{
+				StateMap.Add(StatePair.Key, DuplicateObject(StatePair.Value,
+					this));
+			}
+		}
+	}
 }
 
 void UGameFlowStateComponent::AddTickableActions(const TArray<TWeakObjectPtr<UGameFlowAction>>& Actions)

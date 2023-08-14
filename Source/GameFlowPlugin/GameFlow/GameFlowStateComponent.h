@@ -7,6 +7,7 @@
 #include "Components/ActorComponent.h"
 #include "GameFlowStateComponent.generated.h"
 
+class UGameFlowStateComponentDefinition;
 class UGameFlowAction;
 class UGameFlowState;
 
@@ -68,6 +69,9 @@ public:
 	
 	UPROPERTY(EditAnywhere, Instanced, BlueprintReadOnly, Category = "GameFlow")
 	TMap<FGameplayTag, TObjectPtr<UGameFlowState>> StateMap;
+
+	UFUNCTION(BlueprintCallable, Category = "GameFlow")
+	void ApplyStateDefinition(UGameFlowStateComponentDefinition* StateDefinition);
 
 	void AddTickableActions(const TArray<TWeakObjectPtr<UGameFlowAction>>& Actions);
 	void RemoveTickableActions(const TArray<TWeakObjectPtr<UGameFlowAction>>& Actions);
