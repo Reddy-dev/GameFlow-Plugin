@@ -9,12 +9,13 @@ void UGameFlowAction_FinishState::OnActionStart_Implementation()
 {
 	if (bFinishOwningState)
 	{
+		// ReSharper disable once CppTooWideScopeInitStatement
 		UGameFlowState* OwningState = GetTypedOuter<UGameFlowState>();
 
 		if (ensureMsgf(OwningState, TEXT("GameFlowAction_FinishState: Failed to finish owning state because it is not a UGameFlowState or it isn't valid")))
 		{
 			OwningState->FinishState();
-			FinishAction();
+			FinishAction(true);
 		}
 
 		InterruptActionNative();
@@ -30,7 +31,7 @@ void UGameFlowAction_FinishState::OnActionStart_Implementation()
 	if (UGameFlowState* State = GetStateComponent()->GetStateByTag(StateTag))
 	{
 		State->FinishState();
-		FinishAction();
+		FinishAction(false);
 	}
 	else
 	{

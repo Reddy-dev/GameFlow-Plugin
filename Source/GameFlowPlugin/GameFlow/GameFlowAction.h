@@ -19,8 +19,10 @@ public:
 	UGameFlowAction(const FObjectInitializer& ObjectInitializer);
 	UGameFlowAction();
 
-	virtual UWorld* GetWorld() const override { return GetGameState() ? GetGameState()->GetWorld()
-		: GetOuter()->GetWorld(); }
+	virtual UWorld* GetWorld() const override
+	{
+		return GetGameState() ? GetGameState()->GetWorld() : GetOuter()->GetWorld();
+	}
 
 	FGameFlowActionFinishedDelegate OnFinished;
 
@@ -46,9 +48,9 @@ public:
 	UFUNCTION(BlueprintNativeEvent, Category = "GameFlow")
 	void OnActionTick(float DeltaTime);
 
-	void EndAction();
+	void EndAction(const bool bInterrupted);
 	UFUNCTION(BlueprintNativeEvent, Category = "GameFlow")
-	void OnActionEnd();
+	void OnActionEnd(const bool bInterrupted);
 
 	void InterruptActionNative();
 	UFUNCTION(BlueprintNativeEvent, Category = "GameFlow")
@@ -58,7 +60,7 @@ public:
 	void InterruptAction();
 
 	UFUNCTION(BlueprintCallable, Category = "GameFlow")
-	void FinishAction();
+	void FinishAction(const bool bInterrupted);
 
 	UFUNCTION(BlueprintCallable, Category = "GameFlow")
 	bool IsTickable() const { return bTickable; }
@@ -83,4 +85,4 @@ public:
 	
 	UPROPERTY()
 	TObjectPtr<UGameFlowStateComponent> StateComponent;
-};
+}; // class UGameFlowAction

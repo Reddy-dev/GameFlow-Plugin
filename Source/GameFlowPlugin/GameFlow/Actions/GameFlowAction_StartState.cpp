@@ -10,7 +10,7 @@ void UGameFlowAction_StartState::OnActionStart_Implementation()
 
 	if (GetStateComponent()->StartStateByTag(StateTag))
 	{
-		FinishAction();
+		FinishAction(false);
 	}
 	else
 	{

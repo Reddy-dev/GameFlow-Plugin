@@ -17,4 +17,4 @@ enum class EGameFlowExecutionMode : uint8
 	/* The game flow will be executed in a branched fashion, meaning that each node will be
 	 executed within a chain, but each chain will execute simultaneously. */
 	Branched = 2
-};
+}; // enum class EGameFlowExecutionMode 

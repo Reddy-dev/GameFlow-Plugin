@@ -134,6 +134,7 @@ bool UGameFlowStateComponent::StartState(UGameFlowState* State)
 		}
 
 		State->StartState(this);
+		return true;
 	}
 
 	return false;

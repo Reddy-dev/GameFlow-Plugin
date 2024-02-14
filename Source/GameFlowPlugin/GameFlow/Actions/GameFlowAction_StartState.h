@@ -17,4 +17,4 @@ public:
 	FGameplayTag StateTag;
 
 	virtual void OnActionStart_Implementation() override;
-};
+}; // class UGameFlowAction_StartState

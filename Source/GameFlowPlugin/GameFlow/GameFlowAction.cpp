@@ -33,13 +33,13 @@ void UGameFlowAction::TickAction(float DeltaTime)
 	}
 }
 
-void UGameFlowAction::EndAction()
+void UGameFlowAction::EndAction(const bool bInterrupted)
 {
 	if (bEnabled)
 	{
 		bEnabled = false;
 		OnFinished.Execute(this, false);
-		OnActionEnd();
+		OnActionEnd(bInterrupted);
 	}
 }
 
@@ -47,9 +47,8 @@ void UGameFlowAction::InterruptActionNative()
 {
 	if (bEnabled)
 	{
-		bEnabled = false;
-		OnFinished.ExecuteIfBound(this, true);
 		OnActionInterrupted();
+		FinishAction(true);
 	}
 }
 
@@ -58,9 +57,9 @@ void UGameFlowAction::InterruptAction()
 	InterruptActionNative();
 }
 
-void UGameFlowAction::FinishAction()
+void UGameFlowAction::FinishAction(const bool bInterrupted)
 {
-	EndAction();
+	EndAction(bInterrupted);
 }
 
 void UGameFlowAction::OnActionInterrupted_Implementation()
@@ -68,7 +67,7 @@ void UGameFlowAction::OnActionInterrupted_Implementation()
 	
 }
 
-void UGameFlowAction::OnActionEnd_Implementation()
+void UGameFlowAction::OnActionEnd_Implementation(const bool bInterrupted)
 {
 	
 }

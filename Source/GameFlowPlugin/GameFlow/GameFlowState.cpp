@@ -20,6 +20,7 @@ void UGameFlowState::StartState(UGameFlowStateComponent* GameFlowComponent)
 {
 	checkf(GameFlowComponent, TEXT("GameFlowComponent is null!"));
 	GameStateFlowComponent = GameFlowComponent;
+	
 	for (UGameFlowAction* Action : Actions)
 	{
 		Action->StateComponent = GameFlowComponent;
@@ -68,7 +69,7 @@ void UGameFlowState::FinishState()
 		
 		if (Action->bEnabled)
 		{
-			Action->FinishAction();
+			Action->FinishAction(false);
 		}
 		
 		Action->bEnabled = false;
@@ -87,9 +88,9 @@ void UGameFlowState::InterruptState()
 	}
 }
 
-void UGameFlowState::OnStateFinished(UGameFlowAction* InAction, bool bInterrupted)
+void UGameFlowState::OnStateFinished(UGameFlowAction* InAction, const bool bInterrupted)
 {
-	int32 Index = -1;
+	int32 Index;
 	InAction->OnFinished.Unbind();
 	
 	if (bInterrupted && bCancelOnInterrupt)
@@ -127,8 +128,10 @@ void UGameFlowState::OnStateFinished(UGameFlowAction* InAction, bool bInterrupte
 	{
 		TArray<UGameFlowAction*> Chain;
 		checkf(ChainActions.Contains(InAction->BranchedChainTag), TEXT("Chain tag not found!"));
+		
 		TArray<UGameFlowAction*>& LocChainActions = ChainActions[InAction->BranchedChainTag];
 		Index = LocChainActions.Find(InAction);
+		
 		if (Index != INDEX_NONE && Index + 1 < LocChainActions.Num())
 		{
 			LocChainActions[Index + 1]->OnFinished.BindUObject(this, &UGameFlowState::OnStateFinished);
@@ -137,6 +140,7 @@ void UGameFlowState::OnStateFinished(UGameFlowAction* InAction, bool bInterrupte
 		else
 		{
 			ChainActions.Remove(InAction->BranchedChainTag);
+			
 			if (ChainActions.Num() == 0)
 			{
 				FinishState();

@@ -21,4 +21,4 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GameFlow", meta = (EditCondition = "!bFinishOwningState",
 		EditConditionHides))
 	FGameplayTag StateTag;
-};
+}; // class UGameFlowAction_FinishState
