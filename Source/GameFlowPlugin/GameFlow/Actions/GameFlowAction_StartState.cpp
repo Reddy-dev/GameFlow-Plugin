@@ -14,7 +14,8 @@ void UGameFlowAction_StartState::OnActionStart_Implementation()
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("GameFlowAction_StartState: Failed to start state with tag %s"), *StateTag.ToString());
+		UE_LOG(LogTemp, Warning,
+			TEXT("GameFlowAction_StartState: Failed to start state with tag %s"), *StateTag.ToString());
 		InterruptActionNative();
 	}
 }

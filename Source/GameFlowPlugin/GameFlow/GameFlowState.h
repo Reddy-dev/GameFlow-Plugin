@@ -56,4 +56,4 @@ public:
 protected:
 	UPROPERTY()
 	TObjectPtr<UGameFlowStateComponent> GameStateFlowComponent;
-};
+}; // class UGameFlowState

@@ -25,4 +25,4 @@ public:
 
 	UPROPERTY(EditAnywhere, Instanced, BlueprintReadOnly, Category = "GameFlow")
 	TMap<FGameplayTag, TObjectPtr<UGameFlowState>> StateMap;
-};
+}; // class UGameFlowStateComponentDefinition

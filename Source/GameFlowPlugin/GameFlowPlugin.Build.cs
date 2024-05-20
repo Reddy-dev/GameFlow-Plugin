@@ -41,7 +41,9 @@ public class GameFlowPlugin : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
-				"GameplayTags"
+				"GameplayTags",
+				"ModularGameplay",
+				
 			}
 			);
 		

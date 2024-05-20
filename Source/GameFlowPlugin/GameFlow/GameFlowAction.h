@@ -8,7 +8,7 @@
 #include "GameFramework/GameState.h"
 #include "GameFlowAction.generated.h"
 
-DECLARE_DELEGATE_TwoParams(FGameFlowActionFinishedDelegate, class UGameFlowAction* Action, bool bInterrupted);
+DECLARE_DELEGATE_TwoParams(FGameFlowActionFinishedDelegate, UGameFlowAction* Action, bool bInterrupted);
 
 UCLASS(Abstract, Blueprintable, EditInlineNew, DefaultToInstanced)
 class GAMEFLOWPLUGIN_API UGameFlowAction : public UObject
@@ -19,7 +19,7 @@ public:
 	UGameFlowAction(const FObjectInitializer& ObjectInitializer);
 	UGameFlowAction();
 
-	virtual UWorld* GetWorld() const override
+	virtual UWorld* GetWorld() const final override
 	{
 		return GetGameState() ? GetGameState()->GetWorld() : GetOuter()->GetWorld();
 	}
@@ -27,7 +27,7 @@ public:
 	FGameFlowActionFinishedDelegate OnFinished;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GameFlow")
-	bool bTickable = false;
+	uint8 bTickable : 1 = false;
 
 	// The higher the priority, the earlier the action will be ticked relative to other tickable actions.
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GameFlow", meta = (EditCondition = "bTickable"))
@@ -81,7 +81,7 @@ public:
 	T* GetGameState() const { return Cast<T>(GetGameState()); }
 
 	UPROPERTY()
-	bool bEnabled = false;
+	uint8 bEnabled : 1 = false;
 	
 	UPROPERTY()
 	TObjectPtr<UGameFlowStateComponent> StateComponent;

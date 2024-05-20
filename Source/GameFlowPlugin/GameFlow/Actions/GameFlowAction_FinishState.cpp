@@ -12,7 +12,8 @@ void UGameFlowAction_FinishState::OnActionStart_Implementation()
 		// ReSharper disable once CppTooWideScopeInitStatement
 		UGameFlowState* OwningState = GetTypedOuter<UGameFlowState>();
 
-		if (ensureMsgf(OwningState, TEXT("GameFlowAction_FinishState: Failed to finish owning state because it is not a UGameFlowState or it isn't valid")))
+		if (ensureMsgf(OwningState,
+			TEXT("GameFlowAction_FinishState: Failed to finish owning state because it is not a UGameFlowState or it isn't valid")))
 		{
 			OwningState->FinishState();
 			FinishAction(true);
@@ -22,7 +23,8 @@ void UGameFlowAction_FinishState::OnActionStart_Implementation()
 		return;
 	}
 
-	if (!ensureMsgf(StateTag.IsValid(), TEXT("GameFlowAction_FinishState: Failed to finish state because StateTag is invalid")))
+	if (!ensureMsgf(StateTag.IsValid(),
+		TEXT("GameFlowAction_FinishState: Failed to finish state because StateTag is invalid")))
 	{
 		InterruptActionNative();
 		return;
@@ -35,7 +37,8 @@ void UGameFlowAction_FinishState::OnActionStart_Implementation()
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("GameFlowAction_FinishState: Failed to finish state with tag %s"), *StateTag.ToString());
+		UE_LOG(LogTemp, Warning,
+			TEXT("GameFlowAction_FinishState: Failed to finish state with tag %s"), *StateTag.ToString());
 		InterruptActionNative();
 	}
 }

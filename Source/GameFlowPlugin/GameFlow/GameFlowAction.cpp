@@ -35,7 +35,7 @@ void UGameFlowAction::TickAction(float DeltaTime)
 
 void UGameFlowAction::EndAction(const bool bInterrupted)
 {
-	if (bEnabled)
+	if (LIKELY(bEnabled))
 	{
 		bEnabled = false;
 		OnFinished.Execute(this, false);
@@ -45,7 +45,7 @@ void UGameFlowAction::EndAction(const bool bInterrupted)
 
 void UGameFlowAction::InterruptActionNative()
 {
-	if (bEnabled)
+	if (LIKELY(bEnabled))
 	{
 		OnActionInterrupted();
 		FinishAction(true);

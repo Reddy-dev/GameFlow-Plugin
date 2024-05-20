@@ -79,4 +79,4 @@ public:
 
 	UPROPERTY()
 	TArray<TWeakObjectPtr<UGameFlowAction>> TickableActions;
-};
+}; // class UGameFlowStateComponent

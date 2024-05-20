@@ -51,7 +51,7 @@ void UGameFlowState::StartState(UGameFlowStateComponent* GameFlowComponent)
 				}
 			}
 
-			for (auto& Chain : ChainActions)
+			for (TTuple<FGameplayTag, TArray<UGameFlowAction*>>& Chain : ChainActions)
 			{
 				Chain.Value[0]->OnFinished.BindUObject(this, &UGameFlowState::OnStateFinished);
 				Chain.Value[0]->StartAction();
